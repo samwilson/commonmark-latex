@@ -46,6 +46,10 @@ class RendererTest extends TestCase
                 'Lorem & ipsum',
                 "Lorem \\& ipsum\n\n",
             ],
+            'blockquote' => [
+                "Lorem\n\n> ipsum\nEnd",
+                "Lorem\n\n\begin{quotation}ipsum\nEnd\n\\end{quotation}\n",
+            ],
         ];
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Samwilson\CommonMarkLatex;
 
 use League\CommonMark\Environment\EnvironmentBuilderInterface;
+use League\CommonMark\Extension\CommonMark\Node\Block\BlockQuote;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Emphasis;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
@@ -18,7 +19,7 @@ final class LatexRendererExtension implements ExtensionInterface
     {
         $environment
             ->addInlineParser(new LatexSpecialCharsParser(), 10)
-            // @todo ->addRenderer(BlockQuote::class,    new Renderer\Block\BlockQuoteRenderer(),    10)
+            ->addRenderer(BlockQuote::class, new BlockQuoteRenderer(), 10)
             // @todo ->addRenderer(CoreNode\Block\Document::class,  new CoreRenderer\Block\DocumentRenderer(),  10)
             // @todo ->addRenderer(Node\Block\FencedCode::class,    new Renderer\Block\FencedCodeRenderer(),    10)
             ->addRenderer(Heading::class, new HeadingRenderer(), 10)
