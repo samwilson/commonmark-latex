@@ -16,10 +16,12 @@ class HeadingRenderer implements NodeRendererInterface
     public function render(Node $node, ChildNodeRendererInterface $childRenderer)
     {
         $sec = 'section';
-        if ($node->getDepth() === 2) {
+        if ($node->getLevel() === 2) {
             $sec = 'subsection';
-        } elseif ($node->getDepth() === 3) {
+        } elseif ($node->getLevel() === 3) {
             $sec = 'subsubsection';
+        } elseif ($node->getLevel() === 4) {
+            $sec = 'paragraph';
         }
 
         return '\\' . $sec . '{' . $childRenderer->renderNodes($node->children()) . '}';
