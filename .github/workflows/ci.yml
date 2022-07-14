@@ -30,7 +30,9 @@ jobs:
         php-version: ${{matrix.php}}
 
     - name: Install
-      run: composer install
+      run: |
+        apt install -y texlive-base
+        composer install
 
     - name: Test
       run: composer test
