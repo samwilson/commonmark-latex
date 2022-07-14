@@ -30,9 +30,8 @@ jobs:
         php-version: ${{matrix.php}}
 
     - name: Install
-      run: |
-        sudo apt-get install -y texlive-base
-        composer install
+      run: composer install
 
     - name: Test
+      uses: xu-cheng/texlive-action/full@v1
       run: composer test
