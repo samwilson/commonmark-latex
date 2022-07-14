@@ -34,4 +34,5 @@ jobs:
 
     - name: Test
       uses: xu-cheng/texlive-action/full@v1
-      run: composer test
+      with:
+        run: composer test
