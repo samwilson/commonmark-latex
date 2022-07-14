@@ -18,19 +18,8 @@ class ListBlockRenderer implements NodeRendererInterface
     {
         ListBlock::assertInstanceOf($node);
 
-        $listData = $node->getListData();
-
-        $listType = $listData->type === ListBlock::TYPE_BULLET ? 'itemize' : 'enumerate';
-
-        $attrs = $node->data->get('attributes');
-
-        // if ($listData->start !== null && $listData->start !== 1) {
-        //     $attrs['start'] = (string) $listData->start;
-        // }
-
+        $listType       = $node->getListData()->type === ListBlock::TYPE_BULLET ? 'itemize' : 'enumerate';
         $innerSeparator = $childRenderer->getInnerSeparator();
-
-        // return new HtmlElement($tag, $attrs, $innerSeparator . $childRenderer->renderNodes($node->children()) . $innerSeparator);
 
         return '\\begin{' . $listType . '}' . "\n"
             . $innerSeparator . $childRenderer->renderNodes($node->children()) . $innerSeparator
