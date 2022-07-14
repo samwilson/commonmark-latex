@@ -13,12 +13,11 @@ jobs:
 
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest, windows-latest ]
         php: [ '7.4', '8.0', '8.1' ]
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
-    name: PHP ${{ matrix.php }} on ${{ matrix.os }}
+    name: PHP ${{ matrix.php }}
 
     steps:
     - name: Checkout
@@ -30,9 +29,9 @@ jobs:
         php-version: ${{matrix.php}}
 
     - name: Install
-      run: composer install
+      run: |
+        sudo apt-get install texlive-base
+        composer install
 
     - name: Test
-      uses: xu-cheng/texlive-action/full@v1
-      with:
-        run: composer test
+      run: composer test
