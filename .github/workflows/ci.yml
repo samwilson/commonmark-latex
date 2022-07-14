@@ -31,7 +31,7 @@ jobs:
 
     - name: Install
       run: |
-        apt install -y texlive-base
+        sudo apt-get install -y texlive-base
         composer install
 
     - name: Test
