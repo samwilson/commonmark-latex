@@ -30,7 +30,7 @@ jobs:
 
     - name: Install
       run: |
-        sudo apt-get install texlive
+        sudo apt-get install texlive-latex-extra
         composer install
 
     - name: Test
