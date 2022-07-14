@@ -10,16 +10,20 @@ for rendering Markdown to LaTeX.
 
 ## Installation
 
+Install with [Composer](https://getcomposer.org/):
+
 ```
-$ composer install samwilson/commonmark-latex
+$ composer require samwilson/commonmark-latex
 ```
 
 ## Usage
 
 ```php
 <?php
-$environment = new \League\CommonMark\Environment\Environment(['html_input' => 'allow']);
+$environment = new \League\CommonMark\Environment\Environment();
+// Add the core extension.
 $environment->addExtension(new \League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension\CommonMarkCoreExtension());
+// Add the LaTeX extension.
 $environment->addExtension(new \Samwilson\CommonMarkLatex\LatexRendererExtension());
 $converter = new \League\CommonMark\MarkdownConverter($environment);
 $latex = $converter->convert('*Markdown* content goes here!')->getContent());
@@ -42,4 +46,7 @@ If not, see https://www.gnu.org/licenses/
 
 ## Kudos
 
-* Test image by User:Scarce is Public Domain: https://commons.wikimedia.org/wiki/File:Simple_shapes_example.png
+* The [League/CommonMark](https://commonmark.thephpleague.com/) package (of course!).
+* [Simple_shapes_example.png](https://commons.wikimedia.org/wiki/File:Simple_shapes_example.png)
+  Test image by User:Scarce is Public Domain.
+* [cebe/markdown-latex](https://packagist.org/packages/cebe/markdown-latex) for inspiration and some of the test files.
