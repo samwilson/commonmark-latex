@@ -8,4 +8,4 @@ this is text
 this is PHP code
 ```
 
-this has `inline code` in it
+this has `inline co_de` in it
