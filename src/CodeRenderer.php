@@ -18,6 +18,6 @@ class CodeRenderer implements NodeRendererInterface
     {
         Code::assertInstanceOf($node);
 
-        return '\\texttt{' . $node->getLiteral() . '}';
+        return '\\verb`' . $node->getLiteral() . '`';
     }
 }
