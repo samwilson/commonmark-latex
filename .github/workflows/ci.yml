@@ -31,7 +31,7 @@ jobs:
     - name: Set up TeXLive
       uses: teatimeguest/setup-texlive-action@v2
       with:
-        packages: scheme-basic latexmk listings float
+        packages: scheme-basic latexmk listings float etoolbox
 
     - name: Install
       run: composer install
