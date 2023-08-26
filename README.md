@@ -6,7 +6,7 @@ for rendering Markdown to LaTeX.
 
 ![Packagist Version](https://img.shields.io/packagist/v/samwilson/commonmark-latex)
 ![Packagist License](https://img.shields.io/packagist/l/samwilson/commonmark-latex)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/samwilson/commonmark-latex/CI)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/samwilson/commonmark-latex/ci.yml?branch=main)
 
 ## Installation
 
