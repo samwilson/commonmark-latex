@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        php: [ '7.4', '8.0', '8.1' ]
+        php: [ '7.4', '8.0', '8.1', '8.2' ]
 
     runs-on: ubuntu-latest
 
@@ -28,10 +28,13 @@ jobs:
       with:
         php-version: ${{matrix.php}}
 
+    - name: Set up TeXLive
+      uses: teatimeguest/setup-texlive-action@v2
+      with:
+        packages: scheme-basic latexmk listings float
+
     - name: Install
-      run: |
-        sudo apt-get install texlive-latex-extra
-        composer install
+      run: composer install
 
     - name: Test
       run: composer test
