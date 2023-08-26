@@ -30,7 +30,11 @@ class LinkRenderer implements NodeRendererInterface, ConfigurationAwareInterface
 
         $out = $childRenderer->renderNodes($node->children());
 
-        $url = \str_replace('_', '\\_', $node->getUrl());
+        $replacements = [
+            '_' => '\\_',
+            '#' => '\#',
+        ];
+        $url          = \str_replace(\array_keys($replacements), $replacements, $node->getUrl());
 
         $allowUnsafeLinks = $this->config->get('allow_unsafe_links');
         if (! $allowUnsafeLinks && RegexHelper::isLinkPotentiallyUnsafe($url)) {

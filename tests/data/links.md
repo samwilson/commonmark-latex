@@ -1,4 +1,4 @@
-Link with protocol: [label](https://example.org).
+Link with protocol and fragment: [label](https://example.org/lorem#ipsum).
 
 Relative link: [label](./example.html).
 
