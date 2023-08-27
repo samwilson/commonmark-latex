@@ -33,6 +33,7 @@ class LinkRenderer implements NodeRendererInterface, ConfigurationAwareInterface
         $replacements = [
             '_' => '\\_',
             '#' => '\#',
+            '%' => '\%',
         ];
         $url          = \str_replace(\array_keys($replacements), $replacements, $node->getUrl());
 
