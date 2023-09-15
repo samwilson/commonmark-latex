@@ -13,7 +13,7 @@ final class LatexSpecialCharsParser implements InlineParserInterface
 {
     public function getMatchDefinition(): InlineParserMatch
     {
-        return InlineParserMatch::oneOf('\\\\', '&', '%', '$', '#', '_', '{', '}', '~', '^');
+        return InlineParserMatch::regex('(\\\\|&|%|\$|\#|_|\{|\}|~|(?<!\[)(\^)(?=\s*\]?))');
     }
 
     public function parse(InlineParserContext $inlineContext): bool
