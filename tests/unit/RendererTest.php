@@ -7,6 +7,7 @@ namespace Samwilson\CommonMarkLatex\Test\Unit;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\Autolink\AutolinkExtension;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\Footnote\FootnoteExtension;
 use League\CommonMark\MarkdownConverter;
 use PHPUnit\Framework\TestCase;
 use Samwilson\CommonMarkLatex\LatexRendererExtension;
@@ -18,6 +19,7 @@ class RendererTest extends TestCase
         $environment = new Environment(['html_input' => 'allow']);
         $environment->addExtension(new CommonMarkCoreExtension());
         $environment->addExtension(new AutolinkExtension());
+        $environment->addExtension(new FootnoteExtension());
         $environment->addExtension(new LatexRendererExtension());
         $converter     = new MarkdownConverter($environment);
         $markdownFiles = \glob(\dirname(__DIR__) . '/data/*.md');
