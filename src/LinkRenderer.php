@@ -42,8 +42,8 @@ class LinkRenderer implements NodeRendererInterface, ConfigurationAwareInterface
             return $out;
         }
 
-        // Autolink extension makes the label and the URL the same.
-        if ($out === $url) {
+        // Autolink extension makes the label and the unescaped URL the same.
+        if ($out === $node->getUrl()) {
             return '\\url{' . $url . '}';
         }
 
