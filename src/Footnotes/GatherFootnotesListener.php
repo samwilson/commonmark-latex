@@ -13,9 +13,13 @@ final class GatherFootnotesListener
     /** @var Node[] */
     public static array $footnotes;
 
+    /** @var bool[] */
+    public static array $footnotesUsed = [];
+
     public function onDocumentParsed(DocumentParsedEvent $event): void
     {
-        $document = $event->getDocument();
+        $document            = $event->getDocument();
+        self::$footnotesUsed = [];
 
         foreach ($document->iterator(NodeIterator::FLAG_BLOCKS_ONLY) as $node) {
             if (! $node instanceof Footnote) {
@@ -23,9 +27,11 @@ final class GatherFootnotesListener
             }
 
             $ref = $document->getReferenceMap()->get($node->getReference()->getLabel());
-            if ($ref !== null) {
-                self::$footnotes[$ref->getTitle()] = $node;
+            if ($ref === null) {
+                continue;
             }
+
+            self::$footnotes[FootnoteRefRenderer::cleanFootnoteLabel($ref->getDestination())] = $node;
         }
     }
 }

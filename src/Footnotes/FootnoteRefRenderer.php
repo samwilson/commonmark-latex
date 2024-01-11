@@ -11,6 +11,11 @@ use League\CommonMark\Renderer\NodeRendererInterface;
 
 final class FootnoteRefRenderer implements NodeRendererInterface
 {
+    public static function cleanFootnoteLabel(string $label): string
+    {
+        return \str_replace('#', '', $label);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -18,8 +23,17 @@ final class FootnoteRefRenderer implements NodeRendererInterface
     {
         FootnoteRef::assertInstanceOf($node);
 
-        $footnote = GatherFootnotesListener::$footnotes[$node->getReference()->getTitle()];
+        $fnLabel = self::cleanFootnoteLabel($node->getReference()->getDestination());
 
-        return '\\footnote{' . $childRenderer->renderNodes($footnote->children()) . '}';
+        // Footnote already used, just reference it.
+        if (isset(GatherFootnotesListener::$footnotesUsed[$fnLabel])) {
+            return '\\footref{' . $fnLabel . '}';
+        }
+
+        // New footnote not yet seen.
+        GatherFootnotesListener::$footnotesUsed[$fnLabel] = true;
+        $footnote                                         = GatherFootnotesListener::$footnotes[$fnLabel];
+
+        return '\\footnote{\label{' . $fnLabel . '}' . $childRenderer->renderNodes($footnote->children()) . '}';
     }
 }

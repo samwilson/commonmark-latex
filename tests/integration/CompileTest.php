@@ -34,7 +34,7 @@ class CompileTest extends TestCase
             $tmpTexFile = $workingDir . '/CompileTest_' . \pathinfo($markdownFile, PATHINFO_FILENAME) . '.tex';
             $markdown   = \file_get_contents($markdownFile);
             $latex      = "\\documentclass{article}\n"
-                . "\\usepackage{listings, graphicx, hyperref}\n"
+                . "\\usepackage{listings, graphicx, hyperref, footmisc}\n"
                 . "\\begin{document}\n"
                 . $converter->convert($markdown)->getContent() . "\n"
                 . '\\end{document}';
