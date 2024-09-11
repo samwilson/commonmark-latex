@@ -25,13 +25,10 @@ class CompileTest extends TestCase
         $converter     = new MarkdownConverter($environment);
         $markdownFiles = \glob(\dirname(__DIR__) . '/data/*.md');
         foreach ($markdownFiles as $markdownFile) {
-            if (\basename($markdownFile) === 'README.md') {
-                continue;
-            }
-
             $workingDir = \dirname($markdownFile);
             // Create a temp tex file in the tests directory, so it's got access to images etc.
-            $tmpTexFile = $workingDir . '/CompileTest_' . \pathinfo($markdownFile, PATHINFO_FILENAME) . '.tex';
+            $prefix     = $workingDir . '/CompileTest_';
+            $tmpTexFile = $prefix . \pathinfo($markdownFile, PATHINFO_FILENAME) . '.tex';
             $markdown   = \file_get_contents($markdownFile);
             $latex      = "\\documentclass{article}\n"
                 . "\\usepackage{listings, graphicx, hyperref, footmisc}\n"
@@ -43,6 +40,8 @@ class CompileTest extends TestCase
             $process->mustRun();
             $this->assertStringContainsString('Output written', $process->getOutput());
             $this->assertStringContainsString('1 page', $process->getOutput());
+            // Delete temp files.
+            \array_map('unlink', \glob($prefix . '*'));
         }
     }
 }
