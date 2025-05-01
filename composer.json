@@ -1,11 +1,12 @@
 {
     "name": "samwilson/commonmark-latex",
-    "description": "A LaTeX renderer for CommonMark.",
+    "description": "A CommonMark extension for rendering Markdown to LaTeX.",
     "type": "commonmark-extension",
     "license": "gpl-3.0-or-later",
     "authors": [
         {
-            "name": "Sam Wilson"
+            "name": "Sam Wilson",
+            "homepage": "https://samwilson.id.au/"
         }
     ],
     "require": {

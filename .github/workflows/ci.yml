@@ -37,4 +37,6 @@ jobs:
       run: composer install
 
     - name: Test
-      run: composer test
+      run: |
+        composer validate
+        composer test
