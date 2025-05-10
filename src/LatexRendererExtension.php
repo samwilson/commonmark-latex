@@ -24,6 +24,7 @@ use League\CommonMark\Extension\Footnote\Node\Footnote;
 use League\CommonMark\Extension\Footnote\Node\FootnoteBackref;
 use League\CommonMark\Extension\Footnote\Node\FootnoteContainer;
 use League\CommonMark\Extension\Footnote\Node\FootnoteRef;
+use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
 use League\CommonMark\Node\Block\Paragraph;
 use League\CommonMark\Node\Inline\Text;
 use Samwilson\CommonMarkLatex\Footnotes\FootnoteBackrefRenderer;
@@ -31,6 +32,10 @@ use Samwilson\CommonMarkLatex\Footnotes\FootnoteContainerRenderer;
 use Samwilson\CommonMarkLatex\Footnotes\FootnoteRefRenderer;
 use Samwilson\CommonMarkLatex\Footnotes\FootnoteRenderer;
 use Samwilson\CommonMarkLatex\Footnotes\GatherFootnotesListener;
+use Samwilson\CommonMarkLatex\SmartPunct\EllipsesParser;
+use Samwilson\CommonMarkLatex\SmartPunct\QuoteParser;
+use Samwilson\CommonMarkLatex\SmartPunct\QuoteProcessor;
+use Samwilson\CommonMarkLatex\SmartPunct\ReplaceUnpairedQuotesListener;
 
 final class LatexRendererExtension implements ExtensionInterface
 {
@@ -64,9 +69,19 @@ final class LatexRendererExtension implements ExtensionInterface
                     ->addRenderer(FootnoteRef::class, new FootnoteRefRenderer(), 15)
                     ->addRenderer(Footnote::class, new FootnoteRenderer(), 15)
                     ->addEventListener(DocumentParsedEvent::class, [new GatherFootnotesListener(), 'onDocumentParsed'], 15);
+            }
 
-                return;
+            if ($ext instanceof SmartPunctExtension) {
+                throw new \Exception('The SmartPunctExtension should not be enabled at the same time as the LatexRendererExtension');
             }
         }
+
+        // SmartPunct extension replication.
+        $environment
+            ->addInlineParser(new QuoteParser(), 10)
+            ->addInlineParser(new EllipsesParser(), 15)
+            ->addDelimiterProcessor(QuoteProcessor::createDoubleQuoteProcessor())
+            ->addDelimiterProcessor(QuoteProcessor::createSingleQuoteProcessor())
+            ->addEventListener(DocumentParsedEvent::class, new ReplaceUnpairedQuotesListener());
     }
 }
