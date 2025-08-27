@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        php: [ '7.4', '8.0', '8.1', '8.2', '8.3' ]
+        php: [ '8.0', '8.1', '8.2', '8.3', '8.4' ]
 
     runs-on: ubuntu-latest
 
@@ -29,7 +29,7 @@ jobs:
         php-version: ${{matrix.php}}
 
     - name: Set up TeXLive
-      uses: teatimeguest/setup-texlive-action@v3
+      uses: zauguin/install-texlive@v4
       with:
         packages: scheme-basic latexmk listings float etoolbox footmisc
 
