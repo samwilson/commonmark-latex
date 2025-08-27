@@ -16,7 +16,7 @@
         "phpunit/phpunit": "^12",
         "symfony/var-dumper": "^7",
         "unleashedtech/php-coding-standard": "^3.1",
-        "symfony/process": "^7"
+        "symfony/process": "^6"
     },
     "autoload": {
         "psr-4": {
