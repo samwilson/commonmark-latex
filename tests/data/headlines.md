@@ -1,7 +1,7 @@
 Head 1
 ======
 
-Lorem ipsum...
+Lorem ipsum
 
 ## Head 2
 
