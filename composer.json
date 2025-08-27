@@ -30,7 +30,7 @@
     },
     "scripts": {
         "phpcs": "phpcs",
-        "phpunit": "phpunit --no-coverage",
+        "phpunit": "phpunit",
         "test": [
             "@phpcs",
             "@phpunit"

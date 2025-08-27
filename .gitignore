@@ -4,4 +4,3 @@ composer.lock
 build/
 vendor/
 tests/data/CompileTest*
-
