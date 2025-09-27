@@ -13,6 +13,8 @@ class CodeRenderer implements NodeRendererInterface
 {
     /**
      * {@inheritDoc}
+     *
+     * @param Code $node
      */
     public function render(Node $node, ChildNodeRendererInterface $childRenderer)
     {

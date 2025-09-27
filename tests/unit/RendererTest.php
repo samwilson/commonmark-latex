@@ -23,14 +23,14 @@ class RendererTest extends TestCase
         $environment->addExtension(new LatexRendererExtension());
         $converter     = new MarkdownConverter($environment);
         $markdownFiles = \glob(\dirname(__DIR__) . '/data/*.md');
-        foreach ($markdownFiles as $markdownFile) {
+        foreach ($markdownFiles ?: [] as $markdownFile) {
             if (\basename($markdownFile) === 'README.md') {
                 continue;
             }
 
             $markdown = \file_get_contents($markdownFile);
             $texFile  = \dirname($markdownFile) . '/' . \pathinfo($markdownFile, PATHINFO_FILENAME) . '.tex';
-            $this->assertSame(\file_get_contents($texFile), $converter->convert($markdown)->getContent());
+            $this->assertSame(\file_get_contents($texFile), $converter->convert((string) $markdown)->getContent());
         }
     }
 }

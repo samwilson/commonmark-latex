@@ -20,6 +20,7 @@ final class LatexSpecialCharsParser implements InlineParserInterface
     {
         $char = $inlineContext->getFullMatch();
 
+        $charEscaped = null;
         if (\in_array($char, ['&', '%', '$', '#', '_', '\\', '{', '}'], true)) {
             $charEscaped = '\\' . $char;
         } elseif ($char === '~') {
@@ -30,8 +31,10 @@ final class LatexSpecialCharsParser implements InlineParserInterface
             $charEscaped = '\\textbackslash';
         }
 
-        $inlineContext->getCursor()->advanceBy(\strlen($char));
-        $inlineContext->getContainer()->appendChild(new Text($charEscaped));
+        if ($charEscaped) {
+            $inlineContext->getCursor()->advanceBy(\strlen($char));
+            $inlineContext->getContainer()->appendChild(new Text($charEscaped));
+        }
 
         return true;
     }

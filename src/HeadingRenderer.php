@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Samwilson\CommonMarkLatex;
 
+use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;
@@ -12,6 +13,8 @@ class HeadingRenderer implements NodeRendererInterface
 {
     /**
      * {@inheritDoc}
+     *
+     * @param Heading $node
      */
     public function render(Node $node, ChildNodeRendererInterface $childRenderer)
     {

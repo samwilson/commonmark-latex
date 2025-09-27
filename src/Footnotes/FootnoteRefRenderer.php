@@ -18,6 +18,10 @@ final class FootnoteRefRenderer implements NodeRendererInterface
 
     /**
      * {@inheritDoc}
+     *
+     * @param FootnoteRef $node
+     *
+     * @return string
      */
     public function render(Node $node, ChildNodeRendererInterface $childRenderer)
     {

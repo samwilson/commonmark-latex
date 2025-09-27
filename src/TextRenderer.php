@@ -11,6 +11,9 @@ use League\CommonMark\Renderer\NodeRendererInterface;
 
 class TextRenderer implements NodeRendererInterface
 {
+    /**
+     * @param Text $node
+     */
     public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
     {
         Text::assertInstanceOf($node);
