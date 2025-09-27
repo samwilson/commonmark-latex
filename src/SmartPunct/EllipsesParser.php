@@ -22,8 +22,18 @@ final class EllipsesParser implements InlineParserInterface
 
     public function parse(InlineParserContext $inlineContext): bool
     {
-        $inlineContext->getCursor()->advanceBy($inlineContext->getFullMatchLength());
-        $inlineContext->getContainer()->appendChild(new Text('\dots'));
+        $cursor = $inlineContext->getCursor();
+        $cursor->advanceBy($inlineContext->getFullMatchLength());
+        $text = '\dots';
+        if ($cursor->getCurrentCharacter() === ' ') {
+            // Force a space afterwards if there is one in the Markdown.
+            $text .= '\\';
+        } elseif ($cursor->getCurrentCharacter() !== null) {
+            // Otherwise, if not the end of the line, add a space to separate the dots from what follows.
+            $text .= ' ';
+        }
+
+        $inlineContext->getContainer()->appendChild(new Text($text));
 
         return true;
     }
