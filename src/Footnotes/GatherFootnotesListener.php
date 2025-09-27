@@ -10,7 +10,7 @@ use League\CommonMark\Node\NodeIterator;
 
 final class GatherFootnotesListener
 {
-    /** @var Node[] */
+    /** @var Footnote[] */
     public static array $footnotes;
 
     /** @var bool[] */

@@ -13,6 +13,8 @@ class ImageRenderer implements NodeRendererInterface
 {
     /**
      * {@inheritDoc}
+     *
+     * @param Image $node
      */
     public function render(Node $node, ChildNodeRendererInterface $childRenderer)
     {

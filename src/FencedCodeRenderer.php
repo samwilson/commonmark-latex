@@ -13,6 +13,8 @@ class FencedCodeRenderer implements NodeRendererInterface
 {
     /**
      * {@inheritDoc}
+     *
+     * @param FencedCode $node
      */
     public function render(Node $node, ChildNodeRendererInterface $childRenderer)
     {

@@ -13,6 +13,8 @@ class IndentedCodeRenderer implements NodeRendererInterface
 {
     /**
      * {@inheritDoc}
+     *
+     * @param IndentedCode $node
      */
     public function render(Node $node, ChildNodeRendererInterface $childRenderer)
     {

@@ -23,6 +23,8 @@ class LinkRenderer implements NodeRendererInterface, ConfigurationAwareInterface
 
     /**
      * {@inheritDoc}
+     *
+     * @param Link $node
      */
     public function render(Node $node, ChildNodeRendererInterface $childRenderer)
     {

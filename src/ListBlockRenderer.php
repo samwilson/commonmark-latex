@@ -13,6 +13,8 @@ class ListBlockRenderer implements NodeRendererInterface
 {
     /**
      * {@inheritDoc}
+     *
+     * @param ListBlock $node
      */
     public function render(Node $node, ChildNodeRendererInterface $childRenderer)
     {

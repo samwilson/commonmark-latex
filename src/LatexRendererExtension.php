@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Samwilson\CommonMarkLatex;
 
+use Exception;
+use League\CommonMark\Environment\Environment;
 use League\CommonMark\Environment\EnvironmentBuilderInterface;
 use League\CommonMark\Event\DocumentParsedEvent;
 use League\CommonMark\Extension\CommonMark\Node\Block\BlockQuote;
@@ -39,6 +41,11 @@ use Samwilson\CommonMarkLatex\SmartPunct\ReplaceUnpairedQuotesListener;
 
 final class LatexRendererExtension implements ExtensionInterface
 {
+    /**
+     * @param Environment $environment
+     *
+     * @throws Exception
+     */
     public function register(EnvironmentBuilderInterface $environment): void
     {
         $environment
@@ -72,7 +79,7 @@ final class LatexRendererExtension implements ExtensionInterface
             }
 
             if ($ext instanceof SmartPunctExtension) {
-                throw new \Exception('The SmartPunctExtension should not be enabled at the same time as the LatexRendererExtension');
+                throw new Exception('The SmartPunctExtension should not be enabled at the same time as the LatexRendererExtension');
             }
         }
 

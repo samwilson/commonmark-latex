@@ -24,7 +24,7 @@ class CompileTest extends TestCase
         $environment->addExtension(new LatexRendererExtension());
         $converter     = new MarkdownConverter($environment);
         $markdownFiles = \glob(\dirname(__DIR__) . '/data/*.md');
-        foreach ($markdownFiles as $markdownFile) {
+        foreach ($markdownFiles ?: [] as $markdownFile) {
             $workingDir = \dirname($markdownFile);
             // Create a temp tex file in the tests directory, so it's got access to images etc.
             $prefix     = $workingDir . '/CompileTest_';
@@ -33,7 +33,7 @@ class CompileTest extends TestCase
             $latex      = "\\documentclass{article}\n"
                 . "\\usepackage{listings, graphicx, hyperref, footmisc}\n"
                 . "\\begin{document}\n"
-                . $converter->convert($markdown)->getContent() . "\n"
+                . $converter->convert((string) $markdown)->getContent() . "\n"
                 . '\\end{document}';
             \file_put_contents($tmpTexFile, $latex);
             $process = new Process(['pdflatex', '-halt-on-error', $tmpTexFile], \dirname($markdownFile));
@@ -41,7 +41,7 @@ class CompileTest extends TestCase
             $this->assertStringContainsString('Output written', $process->getOutput());
             $this->assertStringContainsString('1 page', $process->getOutput());
             // Delete temp files.
-            \array_map('unlink', \glob($prefix . '*'));
+            \array_map('unlink', \glob($prefix . '*') ?: []);
         }
     }
 }
