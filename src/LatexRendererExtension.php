@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Samwilson\CommonMarkLatex;
 
+use Exception;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Environment\EnvironmentBuilderInterface;
 use League\CommonMark\Event\DocumentParsedEvent;
@@ -40,6 +41,11 @@ use Samwilson\CommonMarkLatex\SmartPunct\ReplaceUnpairedQuotesListener;
 
 final class LatexRendererExtension implements ExtensionInterface
 {
+    /**
+     * @param Environment $environment
+     *
+     * @throws Exception
+     */
     public function register(EnvironmentBuilderInterface $environment): void
     {
         $environment
@@ -62,20 +68,18 @@ final class LatexRendererExtension implements ExtensionInterface
             ->addRenderer(Link::class, new LinkRenderer(), 10)
             ->addRenderer(Strong::class, new StrongRenderer(), 10);
 
-        if ($environment instanceof Environment) {
-            foreach ($environment->getExtensions() as $ext) {
-                if ($ext instanceof FootnoteExtension) {
-                    $environment
-                        ->addRenderer(FootnoteBackref::class, new FootnoteBackrefRenderer(), 15)
-                        ->addRenderer(FootnoteContainer::class, new FootnoteContainerRenderer(), 15)
-                        ->addRenderer(FootnoteRef::class, new FootnoteRefRenderer(), 15)
-                        ->addRenderer(Footnote::class, new FootnoteRenderer(), 15)
-                        ->addEventListener(DocumentParsedEvent::class, [new GatherFootnotesListener(), 'onDocumentParsed'], 15);
-                }
+        foreach ($environment->getExtensions() as $ext) {
+            if ($ext instanceof FootnoteExtension) {
+                $environment
+                    ->addRenderer(FootnoteBackref::class, new FootnoteBackrefRenderer(), 15)
+                    ->addRenderer(FootnoteContainer::class, new FootnoteContainerRenderer(), 15)
+                    ->addRenderer(FootnoteRef::class, new FootnoteRefRenderer(), 15)
+                    ->addRenderer(Footnote::class, new FootnoteRenderer(), 15)
+                    ->addEventListener(DocumentParsedEvent::class, [new GatherFootnotesListener(), 'onDocumentParsed'], 15);
+            }
 
-                if ($ext instanceof SmartPunctExtension) {
-                    throw new \Exception('The SmartPunctExtension should not be enabled at the same time as the LatexRendererExtension');
-                }
+            if ($ext instanceof SmartPunctExtension) {
+                throw new Exception('The SmartPunctExtension should not be enabled at the same time as the LatexRendererExtension');
             }
         }
 
