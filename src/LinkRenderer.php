@@ -33,7 +33,6 @@ class LinkRenderer implements NodeRendererInterface, ConfigurationAwareInterface
         $out = $childRenderer->renderNodes($node->children());
 
         $replacements = [
-            '_' => '\\_',
             '#' => '\#',
             '%' => '\%',
         ];
