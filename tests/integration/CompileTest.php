@@ -41,7 +41,7 @@ class CompileTest extends TestCase
             $this->assertStringContainsString('Output written', $process->getOutput());
             $this->assertStringContainsString('1 page', $process->getOutput());
             // Delete temp files.
-            //\array_map('unlink', \glob($prefix . '*') ?: []);
+            \array_map('unlink', \glob($prefix . '*') ?: []);
         }
     }
 }
