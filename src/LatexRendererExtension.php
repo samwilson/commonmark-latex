@@ -28,6 +28,7 @@ use League\CommonMark\Extension\Footnote\Node\FootnoteContainer;
 use League\CommonMark\Extension\Footnote\Node\FootnoteRef;
 use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
 use League\CommonMark\Node\Block\Paragraph;
+use League\CommonMark\Node\Inline\Newline;
 use League\CommonMark\Node\Inline\Text;
 use Samwilson\CommonMarkLatex\Footnotes\FootnoteBackrefRenderer;
 use Samwilson\CommonMarkLatex\Footnotes\FootnoteContainerRenderer;
@@ -61,6 +62,7 @@ final class LatexRendererExtension implements ExtensionInterface
             ->addRenderer(ListBlock::class, new ListBlockRenderer(), 10)
             ->addRenderer(ListItem::class, new ListItemRenderer(), 10)
             ->addRenderer(ThematicBreak::class, new ThematicBreakRenderer(), 10)
+            ->addRenderer(Newline::class, new NewlineRenderer(), 10)
 
             ->addRenderer(Code::class, new CodeRenderer(), 10)
             ->addRenderer(Emphasis::class, new EmphasisRenderer(), 10)
