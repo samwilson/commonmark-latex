@@ -24,7 +24,7 @@ class ListBlockRenderer implements NodeRendererInterface
         $innerSeparator = $childRenderer->getInnerSeparator();
 
         return '\\begin{' . $listType . '}' . "\n"
-            . $innerSeparator . $childRenderer->renderNodes($node->children()) . $innerSeparator
-            . '\\end{' . $listType . '}';
+            . $childRenderer->renderNodes($node->children()) . "\n"
+            . '\\end{' . $listType . '}' . "\n";
     }
 }
