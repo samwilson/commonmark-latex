@@ -27,6 +27,11 @@ use League\CommonMark\Extension\Footnote\Node\FootnoteBackref;
 use League\CommonMark\Extension\Footnote\Node\FootnoteContainer;
 use League\CommonMark\Extension\Footnote\Node\FootnoteRef;
 use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
+use League\CommonMark\Extension\Table\Table;
+use League\CommonMark\Extension\Table\TableCell;
+use League\CommonMark\Extension\Table\TableExtension;
+use League\CommonMark\Extension\Table\TableRow;
+use League\CommonMark\Extension\Table\TableSection;
 use League\CommonMark\Node\Block\Paragraph;
 use League\CommonMark\Node\Inline\Newline;
 use League\CommonMark\Node\Inline\Text;
@@ -39,6 +44,10 @@ use Samwilson\CommonMarkLatex\SmartPunct\EllipsesParser;
 use Samwilson\CommonMarkLatex\SmartPunct\QuoteParser;
 use Samwilson\CommonMarkLatex\SmartPunct\QuoteProcessor;
 use Samwilson\CommonMarkLatex\SmartPunct\ReplaceUnpairedQuotesListener;
+use Samwilson\CommonMarkLatex\Table\TableCellRenderer;
+use Samwilson\CommonMarkLatex\Table\TableRenderer;
+use Samwilson\CommonMarkLatex\Table\TableRowRenderer;
+use Samwilson\CommonMarkLatex\Table\TableSectionRenderer;
 
 final class LatexRendererExtension implements ExtensionInterface
 {
@@ -78,10 +87,13 @@ final class LatexRendererExtension implements ExtensionInterface
                     ->addRenderer(FootnoteRef::class, new FootnoteRefRenderer(), 15)
                     ->addRenderer(Footnote::class, new FootnoteRenderer(), 15)
                     ->addEventListener(DocumentParsedEvent::class, [new GatherFootnotesListener(), 'onDocumentParsed'], 15);
-            }
-
-            if ($ext instanceof SmartPunctExtension) {
+            } elseif ($ext instanceof SmartPunctExtension) {
                 throw new Exception('The SmartPunctExtension should not be enabled at the same time as the LatexRendererExtension');
+            } elseif ($ext instanceof TableExtension) {
+                $environment->addRenderer(Table::class, new TableRenderer(), 15);
+                $environment->addRenderer(TableSection::class, new TableSectionRenderer(), 15);
+                $environment->addRenderer(TableRow::class, new TableRowRenderer(), 15);
+                $environment->addRenderer(TableCell::class, new TableCellRenderer(), 15);
             }
         }
 
