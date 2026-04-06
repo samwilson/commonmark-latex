@@ -20,11 +20,10 @@ class ListBlockRenderer implements NodeRendererInterface
     {
         ListBlock::assertInstanceOf($node);
 
-        $listType       = $node->getListData()->type === ListBlock::TYPE_BULLET ? 'itemize' : 'enumerate';
-        $innerSeparator = $childRenderer->getInnerSeparator();
+        $listType = $node->getListData()->type === ListBlock::TYPE_BULLET ? 'itemize' : 'enumerate';
 
         return '\\begin{' . $listType . '}' . "\n"
-            . $innerSeparator . $childRenderer->renderNodes($node->children()) . $innerSeparator
-            . '\\end{' . $listType . '}';
+            . $childRenderer->renderNodes($node->children()) . "\n"
+            . '\\end{' . $listType . '}' . "\n";
     }
 }

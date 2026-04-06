@@ -18,6 +18,6 @@ class ListItemRenderer implements NodeRendererInterface
     {
         ListItem::assertInstanceOf($node);
 
-        return '\\item ' . $childRenderer->renderNodes($node->children());
+        return '\\item ' . \trim($childRenderer->renderNodes($node->children()));
     }
 }
