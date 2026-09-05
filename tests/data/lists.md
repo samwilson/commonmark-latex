@@ -15,3 +15,5 @@ Or numbers:
 2. second
    * A nested list item.
 3. 3rd
+
+1\. A paragraph starting with an escaped list item.

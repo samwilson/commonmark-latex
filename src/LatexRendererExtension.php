@@ -59,7 +59,7 @@ final class LatexRendererExtension implements ExtensionInterface
     public function register(EnvironmentBuilderInterface $environment): void
     {
         $environment
-            ->addInlineParser(new LatexSpecialCharsParser(), 10)
+            ->addInlineParser(new LatexSpecialCharsParser(), 12)
 
             ->addRenderer(Paragraph::class, new ParagraphRenderer(), 10)
             ->addRenderer(Text::class, new TextRenderer(), 10)
