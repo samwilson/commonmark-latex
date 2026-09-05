@@ -18,6 +18,7 @@ class HeadingRenderer implements NodeRendererInterface
      */
     public function render(Node $node, ChildNodeRendererInterface $childRenderer)
     {
+        Heading::assertInstanceOf($node);
         $sec = 'section';
         if ($node->getLevel() === 2) {
             $sec = 'subsection';
