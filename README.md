@@ -7,6 +7,7 @@ for rendering Markdown to LaTeX.
 [![Packagist Version](https://img.shields.io/packagist/v/samwilson/commonmark-latex)](https://packagist.org/packages/samwilson/commonmark-latex)
 [![Packagist License](https://img.shields.io/packagist/l/samwilson/commonmark-latex?color=blue)](https://github.com/samwilson/commonmark-latex/blob/main/LICENSE.md)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/samwilson/commonmark-latex/ci.yml?branch=main)](https://github.com/samwilson/commonmark-latex/actions/workflows/ci.yml)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/samwilson/commonmark-latex/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/samwilson/commonmark-latex/?branch=main)
 
 This extension is in the [list of community extensions](https://github.com/thephpleague/commonmark#community-extensions) to CommonMark.
 
