@@ -15,22 +15,28 @@ This extension is in the [list of community extensions](https://github.com/theph
 
 Install with [Composer](https://getcomposer.org/):
 
-```
+```shell
 $ composer require samwilson/commonmark-latex
 ```
 
 ## Usage
 
+Add the extension to your CommonMark environment: `$environment->addExtension(new LatexRendererExtension());`
+
+Alternatively, here's a full working example:
+
 ```php
 <?php
 $environment = new \League\CommonMark\Environment\Environment();
 // Add the core extension.
-$environment->addExtension(new \League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension\CommonMarkCoreExtension());
+$environment->addExtension(new \League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension());
 // Add the LaTeX extension.
 $environment->addExtension(new \Samwilson\CommonMarkLatex\LatexRendererExtension());
 $converter = new \League\CommonMark\MarkdownConverter($environment);
-$latex = $converter->convert('*Markdown* content goes here!')->getContent());
+$latex = $converter->convert('*Markdown* content goes here!')->getContent();
 ```
+
+Output: `\emph{Markdown} content goes here!`
 
 ## License
 
