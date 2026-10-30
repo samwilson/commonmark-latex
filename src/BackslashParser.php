@@ -25,13 +25,16 @@ final class BackslashParser implements InlineParserInterface
         $cursor = $inlineContext->getCursor();
         $next   = $cursor->peek();
 
+        // Do not escape a backslash at the end of a line.
         if ($next === "\n") {
             return false;
         }
 
-        // Check if this backslash is followed by a special character (i.e. already added by LatexSpecialCharsParser).
+        // If this backslash is escaping something (such as a dot after a number, to prevent a list item),
+        // then append that (with additional escaping if required).
         if ($next !== null && RegexHelper::isEscapable($next)) {
             $cursor->advanceBy(2);
+            // Note that all of the following (other than backslash) are also handled in SpecialCharsParser.
             $map = [
                 '\\' => '\\textbackslash{}',
                 '~' => '\\textasciitilde{}',
