@@ -9,11 +9,11 @@ use League\CommonMark\Parser\Inline\InlineParserInterface;
 use League\CommonMark\Parser\Inline\InlineParserMatch;
 use League\CommonMark\Parser\InlineParserContext;
 
-final class LatexSpecialCharsParser implements InlineParserInterface
+final class SpecialCharsParser implements InlineParserInterface
 {
     public function getMatchDefinition(): InlineParserMatch
     {
-        return InlineParserMatch::regex('(\\\\|&|%|\$|\#|_|\{|\}|~|(?<!\[)(\^)(?=\s*\]?))');
+        return InlineParserMatch::regex('(&|%|\$|\#|_|\{|\}|~|(?<!\[)(\^)(?=\s*\]?))');
     }
 
     public function parse(InlineParserContext $inlineContext): bool
@@ -21,14 +21,12 @@ final class LatexSpecialCharsParser implements InlineParserInterface
         $char = $inlineContext->getFullMatch();
 
         $charEscaped = null;
-        if (\in_array($char, ['&', '%', '$', '#', '_', '\\', '{', '}'], true)) {
+        if (\in_array($char, ['&', '%', '$', '#', '_', '{', '}'], true)) {
             $charEscaped = '\\' . $char;
         } elseif ($char === '~') {
             $charEscaped = '\\textasciitilde';
         } elseif ($char === '^') {
             $charEscaped = '\\textasciicircum';
-        } elseif ($char === '\\') {
-            $charEscaped = '\\textbackslash';
         }
 
         if ($charEscaped) {
